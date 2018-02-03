@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8">
+		<title>Hostel Casa Alta - por Eduardo Areco</title>
+	</head>
+	<body ng-app="hotelApp" ng-controller="usersController" data-ng-init="getUsers()">
+		<ul>
+			<li><a href="clients">Clientes</a></li>
+			<li><a class="active" href="users">Usuarios</a></li>
+			<li><a href="#">Check-in</a></li>
+			<li><a href="#">Habitaciones</a></li>
+			<li><a href="#">Servicios</a></li>
+			<li style="float:right"><a href="javascript: void(0)" onclick="logout();">Salir de sesión</a></li>
+		  </ul>
+		<h2>Organizar usuarios</h2>
+		<form action="/users" method="POST">
+			<input type="hidden" name="id" id="id">
+			Nombre de usuario &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="userName" id="userName"><br/><br/>
+			Contraseña &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" name="password" id="password"><br/><br/>
+			Correo <input type="text" name="email" id="email"><br/><br/>
+			Es Administrador? <input type="checkbox" name="admin" id="admin" ><br><br/>
+			<button type="submit">Guardar</button> &nbsp;&nbsp;&nbsp; <button type="reset">Restaurar</button> 
+			<hr/>
+			<br><br>
+			<table>
+				<tr><th>Nombre de usuario</th><th>Correo</th><th>Es Administrador?</th><th>Acción</th></tr>
+				<tr ng-repeat="user in users">
+					<td>{{ user.userName }}</td>
+					<td>{{ user.email }}</td>
+					<td>{{ user.admin }}</td>
+					<td><a href="javaScript:void(0);" ng-click="deleteUser(user)">Delete</a> | <a href="javaScript:void(0);" ng-click="editUser(user)">Edit</a></td>
+				</tr>
+			</table>
+		</form>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+		<script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+		<script src="/js/users.js"></script>
+		<link rel="stylesheet" type="text/css" href="/css/style.css" >
+	</body>
+</html>

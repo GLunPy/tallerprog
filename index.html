@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8">
+		<title>Hostel Casa Alta - por Eduardo Areco</title>
+	</head>
+	<body ng-app="hotelApp" ng-controller="clientsController" data-ng-init="getClients()">
+		<ul>
+		  <li><a class="active" href="clients">Clientes</a></li>
+		  <li><a href="users">Usuarios</a></li>
+		  <li><a href="#">Check-in</a></li>
+		  <li><a href="#">Habitaciones</a></li>
+		  <li><a href="#">Servicios</a></li>
+		  <li style="float:right"><a href="javascript: void(0)" onclick="logout();">Salir de sesión</a></li>
+		</ul>
+		<h2>Organizar Clientes</h2>
+		<form action="/clients" method="POST">
+			<input type="hidden" name="id" id="id">
+			Nombre &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" placeholder="Ingresar nombre de cliente" name="firstName" id="firstName"><br/><br/>
+			Apellido &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" placeholder="Ingresar apellido de cliente" name="lastName" id="lastName"><br/><br/>
+			Pais &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select name="country" id="country">
+				<option>Paraguay</option>
+				<option>Brasil</option>
+				<option>Argentina</option>
+				<option>Otro</option>
+			</select><br><br/>
+			Fecha de nacimiento&nbsp;<input type="date" name="dob" id="dob"><br/><br/>
+			<button type="submit">Guardar</button> &nbsp;&nbsp;&nbsp; <button type="reset">Restaurar</button> 
+			<hr/>
+			<br><br>
+			<table>
+				<tr><th>Nombre</th><th>Apellido</th><th>Pais</th><th>Fecha de nacimiento</th><th>Acción</th></tr>
+				<tr ng-repeat="client in clients">
+					<td>{{ client.firstName }}</td>
+					<td>{{ client.lastName }}</td>
+					<td>{{ client.country }}</td>
+					<td>{{ client.dob }}</td>
+					<td><a href="javaScript:void(0);" ng-click="deleteClient(client)">Borrar</a> | <a href="javaScript:void(0);" ng-click="editClient(client)">Editar</a></td>
+				</tr>
+			</table>
+		</form>
+		
+		<script src="/js/angular.js"></script>
+		<script src="/js/jquery.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+		<script src="/js/clients.js"></script>
+		<link rel="stylesheet" type="text/css" href="/css/style.css" >
+	</body>
+</html>
